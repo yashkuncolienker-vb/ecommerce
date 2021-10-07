@@ -7,132 +7,41 @@ const {
   carts,
   orders,
 } = require('./collections');
-
+const seedData = require('./seeddata.json');
 (async () => {
-  await roles.create([
-    { slug: 'B1', name: 'user' },
-    { slug: 'hello', name: 'admin' },
-  ]);
-  await roles.create({ slug: 'BP1', name: 'premiumuser' });
-  await roles.update({ name: 'admin' }, { slug: 'A1' });
-  await roles.delete({ name: 'admin' });
+  //Roles CRUD
+  await roles.create(seedData.roles);
+  await roles.update({ name: 'admin' }, { name: 'administrator' });
+  await roles.delete({ name: 'analyst' });
   await roles.read({});
-  await tags.create([
-    { slug: 'hor', name: 'horror' },
-    { slug: 'com', name: 'comedy' },
-  ]);
-  await tags.update({ name: 'horror' }, { slug: 'horr' });
+  //Tags CRUD
+  await tags.create(seedData.tags);
+  await tags.update({ slug: 'D-30' }, { slug: 'discount_30percent' });
+  await tags.delete({ slug: 'D-50' });
   await tags.read({});
-  await tags.delete({ name: 'comedy' });
-  await users.create([
-    {
-      firstname: 'jan',
-      lastname: 'smith',
-      email: 'js@gmail.com',
-      profile_image: 'xxx',
-      role: 'admin',
-    },
-    {
-      firstname: 'tyler',
-      lastname: 'vaz',
-      email: 'tv@gmail.com',
-      profile_image: 'xxx',
-      role: 'customer',
-    },
-  ]);
-  await users.update({ firstname: 'jan' }, { firstname: 'january' });
+  //Users CRUD
+  await users.create(seedData.users);
+  await users.update({ firstname: 'Vina' }, { firstname: 'Jane' });
   await users.read({});
-  await users.delete({ firstname: 'tyler' });
-  await categories.create([
-    {
-      name: 'home appliances',
-      slug: 'h-a',
-      image: 'xxx',
-      description: 'lorem ipsum',
-    },
-    {
-      name: 'electronics',
-      slug: 'el',
-      image: 'xxx',
-      description: 'lorem ipsum',
-    },
-  ]);
-  await categories.update({ slug: 'jan' }, { name: 'household appliances' });
+  await users.delete({ firstname: 'Van' });
+  //Categories CRUD
+  await categories.create(seedData.categories);
+  await categories.update({ slug: 'wo-r' }, { description: 'modified' });
   await categories.read({});
-  await categories.delete({ slug: 'el' });
-  await products.create([
-    {
-      name: 'kenstar oven',
-      thumbnail: 'xxx',
-      product_gallery: ['xxx', 'yyy', 'zzz'],
-      description: 'lorem ipsum',
-      baseprice: 12,
-      sellprice: 15,
-      category_name: ['a', 'b', 'c'],
-      tags: ['x', 'y'],
-      additional_information: 'lorem ipsum',
-    },
-    {
-      name: 'fivestar oven',
-      thumbnail: 'xxx',
-      product_gallery: ['xxx1', 'yyy2', 'zzz3'],
-      description: 'lorem ipsum',
-      baseprice: 12,
-      sellprice: 15,
-      category_name: ['a1', 'b2', 'c3'],
-      tags: ['x1', 'y2'],
-      additional_information: 'lorem ipsum',
-    },
-  ]);
-  await products.update({ name: 'kenstar oven' }, { tags: ['b'] });
+  await categories.delete({ slug: 'to-s' });
+  //Products CRUD
+  await products.create(seedData.products);
+  await products.update({ name: 'Mens Cotton Jacket' }, { tags: ['modified'] });
   await products.read({});
-  await products.delete({ name: 'fivestar oven' });
-  await carts.create([
-    {
-      user: 'timmy',
-      products: [1, 2, 3],
-      product_qty: 0,
-      baseprice: 12,
-      sellprice: 15,
-      totalprice: 10,
-    },
-    {
-      user: 'jacky',
-      products: [3, 5],
-      product_qty: 0,
-      baseprice: 121,
-      sellprice: 151,
-      totalprice: 101,
-    },
-  ]);
-  await carts.update({ user: 'timmy' }, { products: [] });
+  await products.delete({ name: 'Mens Casual Slim Fit' });
+  //Carts CRUD
+  await carts.create(seedData.carts);
+  await carts.update({ user: 'Hailey Gandy' }, { products: ['modified'] });
   await carts.read({});
-  await carts.delete({ user: 'timmy' });
-  await orders.create([
-    {
-      user_id: '1acd',
-      products: ['a', 'a', 'c'],
-      total_items: 3,
-      billing_address: 'xyz',
-      shipping_address: 'xyz',
-      transaction_status: 'standby',
-      payment_mode: 'upi',
-      payment_status: false,
-      order_status: 'processing',
-    },
-    {
-      user_id: '2acd',
-      products: ['a2', '2a', 'c2'],
-      total_items: 3,
-      billing_address: 'xy2z',
-      shipping_address: 'xy2z',
-      transaction_status: 'standby',
-      payment_mode: 'upi',
-      payment_status: false,
-      order_status: 'processing',
-    },
-  ]);
-  await orders.update({ user_id: '1acd' }, { products: [] });
+  await carts.delete({ user: 'Justina Hanshaw' });
+  //Orders CRUD
+  await orders.create(seedData.orders);
+  await orders.update({ user_id: '57JZ04' }, { products: ['modified'] });
   await orders.read({});
-  await orders.delete({ user_id: '2acd' });
+  await orders.delete({ user_id: '38KX32' });
 })().catch(console.dir);

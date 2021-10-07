@@ -16,7 +16,7 @@
 			<column name="description" prior="Description" type="string" jt="12" />
 		</table>
 		<table name="Orders" >
-			<column name="user_id" prior="user" type="string" jt="12" />
+			<column name="user" prior="User" type="string" jt="12" />
 			<column name="total_items" prior="totalitems" type="int" jt="4" />
 			<column name="products" prior="Products" type="array" jt="2003" />
 			<column name="billing_address" prior="billingaddress" type="string" jt="12" />
@@ -33,6 +33,7 @@
 			</column>
 		</table>
 		<table name="Products" >
+			<column name="slug" prior="Slug" type="string" jt="12" />
 			<column name="name" prior="Name" type="string" jt="12" />
 			<column name="thumbnail" prior="Thumbnail" type="string" jt="12" />
 			<column name="product_gallery" prior="productgallery" type="array" jt="2003" />
@@ -40,18 +41,17 @@
 			<column name="baseprice" prior="Base price" type="int" jt="4" />
 			<column name="sellprice" prior="Sell price" type="int" jt="4" />
 			<column name="category_name" prior="categoryname" type="array" jt="2003" />
-			<column name="tags" prior="users " type="array" jt="2003" />
+			<column name="users " type="array" jt="2003" />
 			<column name="additional_information" prior="additionalinformation" type="string" jt="12" />
 		</table>
 		<table name="Roles" >
 			<column name="slug" prior="Slug" type="string" jt="12" mandatory="y" />
-			<column name="name" prior="role" type="string" jt="12" mandatory="y" />
+			<column name="role" prior="Role" type="string" jt="12" mandatory="y" />
 		</table>
 		<table name="Users" >
 			<column name="firstname" prior="First Name" type="string" jt="12" />
 			<column name="lastname" prior="Last Name" type="string" jt="12" />
 			<column name="email" prior="Email" type="string" jt="12" />
-			<column name="profile_image" type="string" jt="12" />
 			<column name="role" prior="Role" type="string" jt="12" >
 				<enumeration><![CDATA["user", "premiumuser", "moderator", "admin"]]></enumeration>
 			</column>

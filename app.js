@@ -1,4 +1,5 @@
 const categories = require('./collections/categories');
+const products = require('./collections/products');
 const roles = require('./collections/roles');
 const tags = require('./collections/tags');
 const users = require('./collections/users');
@@ -31,14 +32,14 @@ const users = require('./collections/users');
   //     firstname: 'jan',
   //     lastname: 'smith',
   //     email: 'js@gmail.com',
-  //     profileimage: 'xxx',
+  //     profile_image: 'xxx',
   //     role: 'admin',
   //   },
   //   {
   //     firstname: 'tyler',
   //     lastname: 'vaz',
   //     email: 'tv@gmail.com',
-  //     profileimage: 'xxx',
+  //     profile_image: 'xxx',
   //     role: 'customer',
   //   },
   // ]);
@@ -62,4 +63,31 @@ const users = require('./collections/users');
   // await categories.update({ slug: 'jan' }, { name: 'household appliances' });
   // await categories.read({});
   // await categories.delete({ slug: 'el' });
+  // await products.create([
+  //   {
+  //     name: 'kenstar oven',
+  //     thumbnail: 'xxx',
+  //     product_gallery: ['xxx', 'yyy', 'zzz'],
+  //     description: 'lorem ipsum',
+  //     baseprice: 12,
+  //     sellprice: 15,
+  //     category_name: ['a', 'b', 'c'],
+  //     tags: ['x', 'y'],
+  //     additional_information: 'lorem ipsum',
+  //   },
+  //   {
+  //     name: 'fivestar oven',
+  //     thumbnail: 'xxx',
+  //     product_gallery: ['xxx1', 'yyy2', 'zzz3'],
+  //     description: 'lorem ipsum',
+  //     baseprice: 12,
+  //     sellprice: 15,
+  //     category_name: ['a1', 'b2', 'c3'],
+  //     tags: ['x1', 'y2'],
+  //     additional_information: 'lorem ipsum',
+  //   },
+  // ]);
+  // await products.update({ name: 'kenstar oven' }, { tags: ['b'] });
+  // await products.read({});
+  // await products.delete({ name: 'fivestar oven' });
 })().catch(console.dir);

@@ -11,7 +11,7 @@ module.exports = {
       } else {
         await roles.insertOne(dataToInsert);
       }
-      console.log('Successfully written role');
+      console.log('Successfully written roles');
     });
   },
   read: async function (query) {
@@ -24,13 +24,13 @@ module.exports = {
   update: async function (fromData, toData) {
     await this.errorHandling(async (roles) => {
       await roles.updateMany(fromData, { $set: toData });
-      console.log('Successfully updated role');
+      console.log('Successfully updated roles');
     });
   },
   delete: async function (dataToDelete) {
     await this.errorHandling(async (roles) => {
       await roles.deleteMany(dataToDelete);
-      console.log('Successfully deleted role');
+      console.log('Successfully deleted roles');
     });
   },
   errorHandling: async function (execFunc) {

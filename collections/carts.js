@@ -5,40 +5,40 @@ const client = new MongoClient(url);
 
 module.exports = {
   create: async function (dataToInsert) {
-    await this.errorHandling(async (cart) => {
+    await this.errorHandling(async (carts) => {
       if (Array.isArray(dataToInsert)) {
-        await cart.insertMany(dataToInsert);
+        await carts.insertMany(dataToInsert);
       } else {
-        await cart.insertOne(dataToInsert);
+        await carts.insertOne(dataToInsert);
       }
-      console.log('Successfully written cart');
+      console.log('Successfully written carts');
     });
   },
   read: async function (query) {
-    await this.errorHandling(async (cart) => {
-      const res = await cart.find(query).toArray();
-      console.log('Successfully found cart');
+    await this.errorHandling(async (carts) => {
+      const res = await carts.find(query).toArray();
+      console.log('Successfully found carts');
       console.log(res);
     });
   },
   update: async function (fromData, toData) {
-    await this.errorHandling(async (cart) => {
-      await cart.updateMany(fromData, { $set: toData });
-      console.log('Successfully updated cart');
+    await this.errorHandling(async (carts) => {
+      await carts.updateMany(fromData, { $set: toData });
+      console.log('Successfully updated carts');
     });
   },
   delete: async function (dataToDelete) {
-    await this.errorHandling(async (cart) => {
-      await cart.deleteMany(dataToDelete);
-      console.log('Successfully deleted cart');
+    await this.errorHandling(async (carts) => {
+      await carts.deleteMany(dataToDelete);
+      console.log('Successfully deleted carts');
     });
   },
   errorHandling: async function (execFunc) {
     try {
       await client.connect();
       const database = client.db(dbName);
-      const cart = database.collection('cart');
-      await execFunc(cart);
+      const carts = database.collection('carts');
+      await execFunc(carts);
     } catch (e) {
       console.log('An Error Occured');
       console.log(e);

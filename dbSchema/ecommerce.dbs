@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project name="MongoDb" id="Project_205f" database="MongoDb" >
 	<schema name="ecommerce" >
-		<table name="Cart" >
+		<table name="Carts" prior="Cart" >
 			<column name="user" prior="User" type="string" jt="12" />
 			<column name="products" prior="Products" type="array" jt="2003" />
 			<column name="product_qty" prior="Product Qty" type="int" jt="4" />
@@ -47,6 +47,10 @@
 			<column name="slug" prior="Slug" type="string" jt="12" mandatory="y" />
 			<column name="name" prior="role" type="string" jt="12" mandatory="y" />
 		</table>
+		<table name="Tags" prior="users" >
+			<column name="name" prior="Name" type="string" jt="12" />
+			<column name="slug" prior="Slug" type="string" jt="12" />
+		</table>
 		<table name="Users" >
 			<column name="firstname" prior="First Name" type="string" jt="12" />
 			<column name="lastname" prior="Last Name" type="string" jt="12" />
@@ -56,21 +60,17 @@
 				<enumeration><![CDATA["user", "premiumuser", "moderator", "admin"]]></enumeration>
 			</column>
 		</table>
-		<table name="users" >
-			<column name="name" prior="Name" type="string" jt="12" />
-			<column name="slug" prior="Slug" type="string" jt="12" />
-		</table>
 	</schema>
 	<connector name="MongoDb" database="MongoDb" driver_class="com.dbschema.MongoJdbcDriver" driver_jar="mongojdbc3.1.jar" driver_desc="No Authentication" host="localhost" port="27017" instance="ecommerce" user="admin" />
 	<layout name="Main Layout" id="Layout_5c3" joined_routing="y" show_column_type="y" show_relation="no_text" >
 		<comment><![CDATA[MongoDb]]></comment>
-		<entity schema="ecommerce" name="Cart" color="C1D8EE" x="528" y="272" />
+		<entity schema="ecommerce" name="Carts" color="C1D8EE" x="528" y="272" />
 		<entity schema="ecommerce" name="Categories" color="C1D8EE" x="304" y="208" />
 		<entity schema="ecommerce" name="Orders" color="C1D8EE" x="528" y="64" />
 		<entity schema="ecommerce" name="Products" color="C1D8EE" x="48" y="208" />
 		<entity schema="ecommerce" name="Roles" color="C1D8EE" x="240" y="48" />
+		<entity schema="ecommerce" name="Tags" color="C1D8EE" x="304" y="336" />
 		<entity schema="ecommerce" name="Users" color="C1D8EE" x="48" y="48" />
-		<entity schema="ecommerce" name="users" color="C1D8EE" x="304" y="336" />
 		<script name="Sample" id="Editor_1244" language="SQL" >
 			<string><![CDATA[db.sampleCollection.insert({"SampleKey":"SampleValue"});]]></string>
 		</script>

@@ -1,3 +1,4 @@
+const cart = require('./collections/cart');
 const categories = require('./collections/categories');
 const products = require('./collections/products');
 const roles = require('./collections/roles');
@@ -90,4 +91,46 @@ const users = require('./collections/users');
   // await products.update({ name: 'kenstar oven' }, { tags: ['b'] });
   // await products.read({});
   // await products.delete({ name: 'fivestar oven' });
+  // await cart.create([
+  //   {
+  //     user: 'timmy',
+  //     products: [1, 2, 3],
+  //     product_qty: 0,
+  //     baseprice: 12,
+  //     sellprice: 15,
+  //     totalprice: 10,
+  //   },
+  //   {
+  //     user: 'jacky',
+  //     products: [3, 5],
+  //     product_qty: 0,
+  //     baseprice: 121,
+  //     sellprice: 151,
+  //     totalprice: 101,
+  //   },
+  // ]);
+  // await cart.update({ user: 'timmy' }, { products: [] });
+  // await cart.read({});
+  // await cart.delete({ user: 'timmy' });
+  await cart.create([
+    {
+      user: 'timmy',
+      products: [1, 2, 3],
+      product_qty: 0,
+      baseprice: 12,
+      sellprice: 15,
+      totalprice: 10,
+    },
+    {
+      user: 'jacky',
+      products: [3, 5],
+      product_qty: 0,
+      baseprice: 121,
+      sellprice: 151,
+      totalprice: 101,
+    },
+  ]);
+  await cart.update({ user: 'timmy' }, { products: [] });
+  await cart.read({});
+  await cart.delete({ user: 'timmy' });
 })().catch(console.dir);

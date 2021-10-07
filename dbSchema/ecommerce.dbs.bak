@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="MongoDb" id="Project_205f" database="MongoDb" >
+	<schema name="ecommerce" >
+		<table name="Cart" >
+			<column name="user" prior="User" type="string" jt="12" />
+			<column name="products" prior="Products" type="array" jt="2003" />
+			<column name="product_qty" prior="Product Qty" type="int" jt="4" />
+			<column name="baseprice" prior="Base Price" type="int" jt="4" />
+			<column name="sellprice" prior="Sell Price" type="int" jt="4" />
+			<column name="totalprice" prior="Total Price" type="int" jt="4" />
+		</table>
+		<table name="Categories" >
+			<column name="name" prior="Name" type="string" jt="12" mandatory="y" />
+			<column name="slug" prior="Slug" type="string" jt="12" mandatory="y" />
+			<column name="image" type="string" jt="12" />
+			<column name="description" prior="Description" type="string" jt="12" />
+		</table>
+		<table name="Orders" >
+			<column name="user_id" prior="user" type="string" jt="12" />
+			<column name="total_items" prior="totalitems" type="int" jt="4" />
+			<column name="products" prior="Products" type="array" jt="2003" />
+			<column name="billing_address" prior="billingaddress" type="string" jt="12" />
+			<column name="shipping_address" prior="shippingaddress" type="string" jt="12" mandatory="y" />
+			<column name="transaction_status" prior="Transaction Status" type="enum" jt="12" mandatory="y" >
+				<enumeration><![CDATA["payment_processing","payment_requested","payment_refused", "standby","payment_processed"]]></enumeration>
+			</column>
+			<column name="payment_mode" prior="Payment Mode" type="enum" jt="12" >
+				<enumeration><![CDATA["credit_card","debit_card","upi","netbanking","cod"]]></enumeration>
+			</column>
+			<column name="payment_status" prior="Payment Status" type="bool" jt="16" mandatory="y" />
+			<column name="order_status" prior="Order Status" type="enum" jt="12" >
+				<enumeration><![CDATA["processing","shipped","out_for_delivery"]]></enumeration>
+			</column>
+		</table>
+		<table name="Products" >
+			<column name="name" prior="Name" type="string" jt="12" />
+			<column name="thumbnail" prior="Thumbnail" type="string" jt="12" />
+			<column name="product_gallery" prior="productgallery" type="array" jt="2003" />
+			<column name="description" prior="Description" type="string" jt="12" />
+			<column name="baseprice" prior="Base price" type="int" jt="4" />
+			<column name="sellprice" prior="Sell price" type="int" jt="4" />
+			<column name="category_name" prior="categoryname" type="array" jt="2003" />
+			<column name="tags" prior="users " type="array" jt="2003" />
+			<column name="additional_information" prior="additionalinformation" type="string" jt="12" />
+		</table>
+		<table name="Roles" >
+			<column name="slug" prior="Slug" type="string" jt="12" mandatory="y" />
+			<column name="name" prior="role" type="string" jt="12" mandatory="y" />
+		</table>
+		<table name="Users" >
+			<column name="firstname" prior="First Name" type="string" jt="12" />
+			<column name="lastname" prior="Last Name" type="string" jt="12" />
+			<column name="email" prior="Email" type="string" jt="12" />
+			<column name="profile_image" type="string" jt="12" />
+			<column name="role" prior="Role" type="string" jt="12" >
+				<enumeration><![CDATA["user", "premiumuser", "moderator", "admin"]]></enumeration>
+			</column>
+		</table>
+		<table name="users" >
+			<column name="name" prior="Name" type="string" jt="12" />
+			<column name="slug" prior="Slug" type="string" jt="12" />
+		</table>
+	</schema>
+	<connector name="MongoDb" database="MongoDb" driver_class="com.dbschema.MongoJdbcDriver" driver_jar="mongojdbc3.1.jar" driver_desc="No Authentication" host="localhost" port="27017" instance="ecommerce" user="admin" />
+	<layout name="Main Layout" id="Layout_5c3" joined_routing="y" show_column_type="y" show_relation="no_text" >
+		<comment><![CDATA[MongoDb]]></comment>
+		<entity schema="ecommerce" name="Cart" color="C1D8EE" x="528" y="272" />
+		<entity schema="ecommerce" name="Categories" color="C1D8EE" x="304" y="208" />
+		<entity schema="ecommerce" name="Orders" color="C1D8EE" x="528" y="64" />
+		<entity schema="ecommerce" name="Products" color="C1D8EE" x="48" y="208" />
+		<entity schema="ecommerce" name="Roles" color="C1D8EE" x="240" y="48" />
+		<entity schema="ecommerce" name="Users" color="C1D8EE" x="48" y="48" />
+		<entity schema="ecommerce" name="users" color="C1D8EE" x="304" y="336" />
+		<script name="Sample" id="Editor_1244" language="SQL" >
+			<string><![CDATA[db.sampleCollection.insert({"SampleKey":"SampleValue"});]]></string>
+		</script>
+		<query id="Query_24ac" name="Fk_Categories_Products" confirmed="y" >
+			<query_table schema="ecommerce" name="Products" alias="Products" x="48" y="48" >
+				<column name="name" />
+				<column name="thumbnail" />
+				<column name="product_gallery" />
+				<column name="description" />
+				<column name="baseprice" />
+				<column name="sellprice" />
+				<column name="category_name" />
+				<column name="additional_information" />
+			</query_table>
+		</query>
+	</layout>
+</project>

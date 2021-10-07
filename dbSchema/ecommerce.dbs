@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="MongoDb" id="Project_205f" database="MongoDb" >
+	<schema name="ecommerce" >
+		<table name="Cart" >
+			<column name="User" type="string" jt="12" />
+			<column name="Products" type="array" jt="2003" />
+			<column name="Product Qty" type="int" jt="4" />
+			<column name="Base Price" type="int" jt="4" />
+			<column name="Sell Price" type="int" jt="4" />
+			<column name="Total Price" type="int" jt="4" />
+		</table>
+		<table name="Categories" >
+			<column name="Name" type="string" jt="12" mandatory="y" />
+			<column name="Slug" type="string" jt="12" mandatory="y" />
+			<column name="image" type="bindata" jt="2004" />
+			<column name="Description" type="string" jt="12" />
+		</table>
+		<table name="Orders" >
+			<column name="User" prior="User id" type="string" jt="12" />
+			<column name="Total items" type="int" jt="4" />
+			<column name="Products" type="array" jt="2003" />
+			<column name="Billing Address" type="string" jt="12" />
+			<column name="Shipping Address" type="string" jt="12" mandatory="y" />
+			<column name="Transaction Status" type="enum" jt="12" mandatory="y" >
+				<enumeration><![CDATA["Payment Processing","Payment Requested","Payment Refused", "Being Processed", "Standby","Payment processed by merchant"]]></enumeration>
+			</column>
+			<column name="Payment Mode" type="enum" jt="12" >
+				<enumeration><![CDATA["credit card","debit card","upi","netbanking","cash on delivery"]]></enumeration>
+			</column>
+			<column name="Payment Status" type="bool" jt="16" mandatory="y" />
+			<column name="Order Status" type="enum" jt="12" >
+				<enumeration><![CDATA["processing","shipped","out for delivery"]]></enumeration>
+			</column>
+		</table>
+		<table name="Products" >
+			<column name="Slug" type="string" jt="12" />
+			<column name="Name" type="string" jt="12" />
+			<column name="Thumbnail" type="bindata" jt="2004" />
+			<column name="Product Gallery" type="array" jt="2003" />
+			<column name="Description" type="string" jt="12" />
+			<column name="Base price" type="int" jt="4" />
+			<column name="Sell price" type="int" jt="4" />
+			<column name="Category Name" type="array" jt="2003" />
+			<column name="users " type="array" jt="2003" />
+			<column name="Additional information" type="string" jt="12" />
+		</table>
+		<table name="Roles" >
+			<column name="Slug" type="string" jt="12" mandatory="y" />
+			<column name="Role" type="string" jt="12" mandatory="y" />
+		</table>
+		<table name="users" >
+			<column name="Name" type="string" jt="12" />
+			<column name="Slug" type="string" jt="12" />
+		</table>
+		<table name="Users" >
+			<column name="First Name" type="string" jt="12" />
+			<column name="Last Name" type="string" jt="12" />
+			<column name="Email" type="string" jt="12" />
+			<column name="Role" type="string" jt="12" >
+				<enumeration><![CDATA["user", "premiumuser", "moderator", "admin"]]></enumeration>
+			</column>
+		</table>
+	</schema>
+	<connector name="MongoDb" database="MongoDb" driver_class="com.dbschema.MongoJdbcDriver" driver_jar="mongojdbc3.1.jar" driver_desc="No Authentication" host="localhost" port="27017" instance="ecommerce" user="admin" />
+	<layout name="Main Layout" id="Layout_5c3" joined_routing="y" show_column_type="y" show_relation="no_text" >
+		<comment><![CDATA[MongoDb]]></comment>
+		<entity schema="ecommerce" name="Cart" color="C1D8EE" x="528" y="272" />
+		<entity schema="ecommerce" name="Categories" color="C1D8EE" x="304" y="208" />
+		<entity schema="ecommerce" name="Orders" color="C1D8EE" x="528" y="64" />
+		<entity schema="ecommerce" name="Products" color="C1D8EE" x="48" y="208" />
+		<entity schema="ecommerce" name="Roles" color="C1D8EE" x="240" y="48" />
+		<entity schema="ecommerce" name="users" color="C1D8EE" x="304" y="336" />
+		<entity schema="ecommerce" name="Users" color="C1D8EE" x="48" y="48" />
+		<script name="Sample" id="Editor_1244" language="SQL" >
+			<string><![CDATA[db.sampleCollection.insert({"SampleKey":"SampleValue"});]]></string>
+		</script>
+		<query id="Query_24ac" name="Fk_Categories_Products" confirmed="y" >
+			<query_table schema="ecommerce" name="Products" alias="Products" x="48" y="48" >
+				<column name="Name" />
+				<column name="Thumbnail" />
+				<column name="Product Gallery" />
+				<column name="Description" />
+				<column name="Base price" />
+				<column name="Sell price" />
+				<column name="Category Name" />
+				<column name="Additional information" />
+				<query_table schema="ecommerce" name="Categories" alias="Categories" x="352" y="96" fk="Fk_Categories_Products" type="Inner Join" />
+			</query_table>
+		</query>
+	</layout>
+</project>

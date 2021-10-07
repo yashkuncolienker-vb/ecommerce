@@ -5,40 +5,40 @@ const client = new MongoClient(url);
 
 module.exports = {
   create: async function (dataToInsert) {
-    await this.errorHandling(async (roles) => {
+    await this.errorHandling(async (tags) => {
       if (Array.isArray(dataToInsert)) {
-        await roles.insertMany(dataToInsert);
+        await tags.insertMany(dataToInsert);
       } else {
-        await roles.insertOne(dataToInsert);
+        await tags.insertOne(dataToInsert);
       }
       console.log('Successfully written role');
     });
   },
   read: async function (query) {
-    await this.errorHandling(async (roles) => {
-      const res = await roles.find(query).toArray();
-      console.log('Successfully found roles');
+    await this.errorHandling(async (tags) => {
+      const res = await tags.find(query).toArray();
+      console.log('Successfully found tags');
       console.log(res);
     });
   },
   update: async function (fromData, toData) {
-    await this.errorHandling(async (roles) => {
-      await roles.updateMany(fromData, { $set: toData });
-      console.log('Successfully updated role');
+    await this.errorHandling(async (tags) => {
+      await tags.updateMany(fromData, { $set: toData });
+      console.log('Successfully updated tags');
     });
   },
   delete: async function (dataToDelete) {
-    await this.errorHandling(async (roles) => {
-      await roles.deleteMany(dataToDelete);
-      console.log('Successfully deleted role');
+    await this.errorHandling(async (tags) => {
+      await tags.deleteMany(dataToDelete);
+      console.log('Successfully deleted tags');
     });
   },
   errorHandling: async function (execFunc) {
     try {
       await client.connect();
       const database = client.db(dbName);
-      const roles = database.collection('roles');
-      await execFunc(roles);
+      const tags = database.collection('tags');
+      await execFunc(tags);
     } catch (e) {
       console.log('An Error Occured');
       console.log(e);
